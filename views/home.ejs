@@ -1,0 +1,73 @@
+<html lang="en" dir="ltr">
+  <%- include("partails/header") %>
+  <body>
+    <div class="container">
+      <h1>สถานะการณ์ Covid 19 ปัจจุบัน</h1>
+      <p style="color: red"><%= startContent %></p>
+
+      <br />
+
+      <div class="container-information">
+        <div class="card red long-card">
+          <h2>ติดเชื้อสะสม</h2>
+          <h3><%= data.Confirmed %> (+ <%=data.NewConfirmed %> )</h3>
+        </div>
+        <div class="card green short-card">
+          <h2>หายแล้ว</h2>
+          <h3><%= data.Recovered %> (+ <%=data.NewRecovered %> )</h3>
+        </div>
+        <div class="card blue short-card">
+          <h2>รักษาอยู่</h2>
+          <h3><%= data.Hospitalized %></h3>
+        </div>
+
+        <div class="card gray short-card">
+          <h2>เสียชีวิต</h2>
+          <h3><%= data.Deaths %></h3>
+        </div>
+      </div>
+
+      <br />
+      <table>
+        <tr>
+          <th>ข้อมูลวันที่</th>
+          <th>รายใหม่</th>
+          <th>เข้ารับการรักษา</th>
+          <th>หายดี</th>
+          <th>เสียชีวิต</th>
+        </tr>
+
+        <% let i = 1 ; %> <% while (i <= 5) { %>
+
+        <tr>
+          <td><%= timeline[timeline.length - i].Date %></td>
+          <td>
+            <%= timeline[timeline.length - i].NewConfirmed > 0 ?
+            "+"+timeline[timeline.length - i].NewConfirmed
+            :timeline[timeline.length - i].NewConfirmed %>
+          </td>
+          <td>
+            <%= timeline[timeline.length - i].NewHospitalized > 0 ?
+            "+"+timeline[timeline.length - i].NewHospitalized
+            :timeline[timeline.length - i].NewHospitalized %>
+          </td>
+          <td>
+            <%= timeline[timeline.length - i].NewRecovered > 0 ?
+            "+"+timeline[timeline.length - i].NewRecovered
+            :timeline[timeline.length - i].NewRecovered %>
+          </td>
+          <td>
+            <%= timeline[timeline.length - i].NewDeaths > 0 ?
+            "+"+timeline[timeline.length - i].NewDeaths
+            :timeline[timeline.length - i].NewDeaths %>
+          </td>
+        </tr>
+
+        <% i++ ; } %>
+      </table>
+    </div>
+
+    <br />
+    <%- include("partails/footer") %>
+  </body>
+</html>
